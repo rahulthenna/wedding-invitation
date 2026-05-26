@@ -1,18 +1,74 @@
 // ==========================================
-// Background Music
+// ENTRY SCREEN
 // ==========================================
 
-window.addEventListener('click', () => {
+const entryScreen =
+  document.getElementById('entry-screen');
 
-  const music = document.getElementById('bgMusic');
+const mainContent =
+  document.getElementById('main-content');
+
+const enterBtn =
+  document.getElementById('enter-btn');
+
+enterBtn.addEventListener('click', () => {
+
+  entryScreen.style.opacity = '0';
+
+  setTimeout(() => {
+
+    entryScreen.style.display = 'none';
+
+    mainContent.style.opacity = '1';
+
+  }, 1000);
+
+  // Play music
+
+  const music =
+    document.getElementById('bgMusic');
 
   music.play();
 
-}, { once: true });
+});
 
 
 // ==========================================
-// Countdown Timer
+// REVEAL ANIMATION
+// ==========================================
+
+function revealSections() {
+
+  const reveals =
+    document.querySelectorAll('.reveal');
+
+  reveals.forEach((section) => {
+
+    const windowHeight =
+      window.innerHeight;
+
+    const revealTop =
+      section.getBoundingClientRect().top;
+
+    const revealPoint = 120;
+
+    if (revealTop < windowHeight - revealPoint) {
+
+      section.classList.add('active');
+    }
+  });
+}
+
+window.addEventListener(
+  'scroll',
+  revealSections
+);
+
+revealSections();
+
+
+// ==========================================
+// COUNTDOWN TIMER
 // ==========================================
 
 const weddingDate =
@@ -20,64 +76,62 @@ const weddingDate =
 
 const timer = setInterval(() => {
 
-  const now = new Date().getTime();
+  const now =
+    new Date().getTime();
 
-  const distance = weddingDate - now;
+  const distance =
+    weddingDate - now;
 
   const days =
-    Math.floor(distance / (1000 * 60 * 60 * 24));
+    Math.floor(distance /
+      (1000 * 60 * 60 * 24));
 
   const hours =
-    Math.floor((distance %
-      (1000 * 60 * 60 * 24)) /
-      (1000 * 60 * 60));
+    Math.floor(
+      (distance %
+        (1000 * 60 * 60 * 24)) /
+      (1000 * 60 * 60)
+    );
 
   const minutes =
-    Math.floor((distance %
-      (1000 * 60 * 60)) /
-      (1000 * 60));
+    Math.floor(
+      (distance %
+        (1000 * 60 * 60)) /
+      (1000 * 60)
+    );
 
   const seconds =
-    Math.floor((distance %
-      (1000 * 60)) / 1000);
+    Math.floor(
+      (distance %
+        (1000 * 60)) / 1000
+    );
 
-  document.getElementById("days").innerHTML = days;
+  document.getElementById('days').innerHTML = days;
 
-  document.getElementById("hours").innerHTML = hours;
+  document.getElementById('hours').innerHTML = hours;
 
-  document.getElementById("minutes").innerHTML = minutes;
+  document.getElementById('minutes').innerHTML = minutes;
 
-  document.getElementById("seconds").innerHTML = seconds;
-
-  if (distance < 0) {
-
-    clearInterval(timer);
-
-    document.querySelector(".countdown-container").innerHTML = `
-      <h2 style="
-        color:#b38b2d;
-        font-family:Cinzel, serif;
-      ">
-        We Are Married ❤️
-      </h2>
-    `;
-  }
+  document.getElementById('seconds').innerHTML = seconds;
 
 }, 1000);
 
 
 // ==========================================
-// Fireworks Animation
+// FIREWORKS
 // ==========================================
 
 const canvas =
   document.getElementById('fireworks');
 
-const ctx = canvas.getContext('2d');
+const ctx =
+  canvas.getContext('2d');
 
-canvas.width = window.innerWidth;
+canvas.width =
+  window.innerWidth;
 
-canvas.height = window.innerHeight;
+canvas.height =
+  window.innerHeight;
 
 let fireworks = [];
 
@@ -183,12 +237,15 @@ animateFireworks();
 
 
 // ==========================================
-// Resize Canvas
+// RESIZE CANVAS
 // ==========================================
 
 window.addEventListener('resize', () => {
 
-  canvas.width = window.innerWidth;
+  canvas.width =
+    window.innerWidth;
 
-  canvas.height = window.innerHeight;
+  canvas.height =
+    window.innerHeight;
+
 });
